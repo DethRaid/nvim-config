@@ -104,4 +104,15 @@ M.rand_colorscheme = function()
   M.colorscheme_conf[colorscheme]()
 end
 
+M.gruvbox_material = function()
+  -- foreground option can be material, mix, or original
+  vim.g.gruvbox_material_foreground = "original"
+  --background option can be hard, medium, soft
+  vim.g.gruvbox_material_background = "hard"
+  vim.g.gruvbox_material_enable_italic = 1
+  vim.g.gruvbox_material_better_performance = 1
+
+  use_theme("gruvbox-material")
+end
+
 return M

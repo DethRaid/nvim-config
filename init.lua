@@ -38,4 +38,6 @@ require("diagnostic-conf")
 local color_scheme = require("colorschemes")
 
 -- Load a random colorscheme
-color_scheme.rand_colorscheme()
+-- color_scheme.gruvbox_material()
+color_scheme.gruvbox_material();
+
