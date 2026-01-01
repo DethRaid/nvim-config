@@ -62,19 +62,8 @@ local plugin_specs = {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    lazy = true,
+    lazy = false,
     build = ":TSUpdate",
-    config = function()
-      require("config.treesitter")
-    end,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    event = "VeryLazy",
-    branch = "master",
-    config = function()
-      require("config.treesitter-textobjects")
-    end,
   },
   { "machakann/vim-swap", event = "VeryLazy" },
 
@@ -714,24 +703,6 @@ local plugin_specs = {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },
     },
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-    },
-    opts = {
-      debug = true, -- Enable debugging
-      -- See Configuration section for rest
-    },
-    cmd = { "CopilotChat" },
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    config = function()
-      require("copilot").setup {}
-    end,
   },
   {
     "smjonas/live-command.nvim",

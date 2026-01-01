@@ -128,6 +128,8 @@ LUA_LS_DIR=$HOME/tools/lua-language-server
 LUA_LS_SRC=$HOME/packages/lua-language-server.tar.gz
 LUA_LS_LINK="https://github.com/LuaLS/lua-language-server/releases/download/3.6.11/lua-language-server-3.6.11-linux-x64.tar.gz"
 
+sudo dnf install lua
+
 if [[ -z "$(command -v lua-language-server)" ]] && [[ ! -f "$LUA_LS_DIR/bin/lua-language-server" ]]; then
     echo 'Install lua-language-server'
     if [[ ! -f $LUA_LS_SRC ]]; then
