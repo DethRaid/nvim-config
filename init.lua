@@ -36,8 +36,17 @@ require("diagnostic-conf")
 
 -- colorscheme settings
 local color_scheme = require("colorschemes")
-
--- Load a random colorscheme
--- color_scheme.gruvbox_material()
 color_scheme.gruvbox_material();
+
+-- set some filetype associations
+vim.filetype.add({
+    extension = {
+        -- rmlui
+        rml = 'html',
+        rcss = 'css',
+        -- sah engine
+        sscene = 'json',
+        sprefab = 'json',
+    }
+})
 
