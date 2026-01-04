@@ -7,7 +7,7 @@ PYTHON_INSTALLED=true
 
 # If Python has been installed, then we need to know whether Python is provided
 # by the system, or you have already installed Python under your HOME.
-SYSTEM_PYTHON=false
+SYSTEM_PYTHON=true
 
 # If SYSTEM_PYTHON is false, we need to decide whether to install
 # Anaconda (INSTALL_ANACONDA=true) or Miniconda (INSTALL_ANACONDA=false)
@@ -116,10 +116,10 @@ else
 fi
 
 # Install vim-language-server
-"$NODE_DIR/bin/npm" install -g vim-language-server
+sudo "$NODE_DIR/bin/npm" install -g vim-language-server
 
 # Install bash-language-server
-"$NODE_DIR/bin/npm" install -g bash-language-server
+sudo "$NODE_DIR/bin/npm" install -g bash-language-server
 
 #######################################################################
 #                         lua-language-server                         #
@@ -245,14 +245,6 @@ if [[ ! -f "$NVIM_DIR/bin/nvim" ]]; then
 else
     echo "Nvim is already installed. Skip installing it."
 fi
-
-echo "Setting up config and installing plugins"
-if [[ -d "$NVIM_CONFIG_DIR" ]]; then
-    rm -rf "$NVIM_CONFIG_DIR.backup"
-    mv "$NVIM_CONFIG_DIR" "$NVIM_CONFIG_DIR.backup"
-fi
-
-git clone --depth=1 https://github.com/jdhao/nvim-config.git "$NVIM_CONFIG_DIR"
 
 echo "Installing nvim plugins, please wait"
 "$NVIM_DIR/bin/nvim" -c "autocmd User LazyInstall quitall"  -c "lua require('lazy').install()"
