@@ -120,11 +120,11 @@ else
     NODE_DIR="$(realpath $(dirname $(which node))/..)"
 fi
 
-# Install vim-language-server
 sudo "$NODE_DIR/bin/npm" install -g vim-language-server
 
-# Install bash-language-server
 sudo "$NODE_DIR/bin/npm" install -g bash-language-server
+
+sudo "$NODE_DIR/bin/npm" install -g yaml-language-server
 
 #######################################################################
 #                         lua-language-server                         #
