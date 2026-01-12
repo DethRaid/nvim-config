@@ -739,6 +739,12 @@ local plugin_specs = {
     ---@type quicker.SetupOptions
     opts = {},
   },
+  -- rust
+  {
+      "mrcjkb/rustaceanvim",
+      version = '^6',
+      lazy = false,
+  }
 }
 
 require("lazy").setup {
