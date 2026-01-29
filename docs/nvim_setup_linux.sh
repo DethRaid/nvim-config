@@ -126,6 +126,8 @@ sudo "$NODE_DIR/bin/npm" install -g bash-language-server
 
 sudo "$NODE_DIR/bin/npm" install -g yaml-language-server
 
+sudo "$NODE_DIR/bin/npm" install -g typescript typescript-language-server
+
 #######################################################################
 #                         lua-language-server                         #
 #######################################################################

@@ -132,6 +132,7 @@ local enabled_lsp_servers = {
   vimls = "vim-language-server",
   bashls = "bash-language-server",
   yamlls = "yaml-language-server",
+  tsserver = 'typescript-language-server'
 }
 
 for server_name, lsp_executable in pairs(enabled_lsp_servers) do
@@ -146,3 +147,10 @@ for server_name, lsp_executable in pairs(enabled_lsp_servers) do
     vim.notify(msg, vim.log.levels.WARN, { title = "Nvim-config" })
   end
 end
+
+vim.lsp.config('tsserver', {
+    cmd = {'typescript-language-server', '--stdio'},
+    filetypes = {'typescript'},
+    root_dir = vim.fs.root(0, {'package.json', '.git'}),
+    capabilities = capabilities,
+})
