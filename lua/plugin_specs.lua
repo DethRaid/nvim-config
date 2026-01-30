@@ -753,6 +753,7 @@ local plugin_specs = {
         vim.cmd([[
             let g:clang_format#detect_style_file=1
             let g:clang_format#auto_format=1
+            let g:clang_format#auto_filetypes = ["c", "cpp"]
         ]])
     end
   }
