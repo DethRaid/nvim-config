@@ -224,6 +224,9 @@ else
     echo "ctags is already installed. Skip installing it."
 fi
 
+## clangd install
+sudo dnf install clangd
+
 #######################################################################
 #                                Nvim install                         #
 #######################################################################
