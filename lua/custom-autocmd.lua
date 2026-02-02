@@ -242,3 +242,11 @@ api.nvim_create_autocmd("BufReadPre", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_command("mks!")
+  end
+})
+
