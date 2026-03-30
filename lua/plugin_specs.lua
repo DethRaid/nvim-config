@@ -756,7 +756,10 @@ local plugin_specs = {
             let g:clang_format#auto_filetypes = ["c", "cpp"]
         ]])
     end
-  }
+  },
+
+  -- gdb?
+  { 'sakhnik/nvim-gdb' },
 }
 
 require("lazy").setup {
