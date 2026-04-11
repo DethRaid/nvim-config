@@ -120,13 +120,13 @@ else
     NODE_DIR="$(realpath $(dirname $(which node))/..)"
 fi
 
-sudo "$NODE_DIR/bin/npm" install -g vim-language-server
+"$NODE_DIR/bin/npm" install -g vim-language-server
 
-sudo "$NODE_DIR/bin/npm" install -g bash-language-server
+"$NODE_DIR/bin/npm" install -g bash-language-server
 
-sudo "$NODE_DIR/bin/npm" install -g yaml-language-server
+"$NODE_DIR/bin/npm" install -g yaml-language-server
 
-sudo "$NODE_DIR/bin/npm" install -g typescript typescript-language-server
+"$NODE_DIR/bin/npm" install -g typescript typescript-language-server
 
 #######################################################################
 #                         lua-language-server                         #
@@ -134,8 +134,6 @@ sudo "$NODE_DIR/bin/npm" install -g typescript typescript-language-server
 LUA_LS_DIR=$HOME/tools/lua-language-server
 LUA_LS_SRC=$HOME/packages/lua-language-server.tar.gz
 LUA_LS_LINK="https://github.com/LuaLS/lua-language-server/releases/download/3.16.4/lua-language-server-3.16.4-linux-x64.tar.gz"
-
-sudo dnf install lua
 
 if [[ -z "$(command -v lua-language-server)" ]] && [[ ! -f "$LUA_LS_DIR/bin/lua-language-server" ]]; then
     echo 'Install lua-language-server'
@@ -224,8 +222,7 @@ else
     echo "ctags is already installed. Skip installing it."
 fi
 
-## clangd install
-sudo dnf install clangd
+# TODO: test for and install lua and clangd
 
 #######################################################################
 #                                Nvim install                         #

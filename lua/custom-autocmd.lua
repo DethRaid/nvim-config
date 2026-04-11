@@ -250,3 +250,5 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
   end
 })
 
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+

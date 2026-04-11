@@ -10,10 +10,6 @@ keymap.set("i", "<c-u>", "<Esc>viwUea")
 -- Turn the current word into title case
 keymap.set("i", "<c-t>", "<Esc>b~lea")
 
--- Paste non-linewise text above or below current line, see https://stackoverflow.com/a/1346777/6064933
-keymap.set("n", "<leader>p", "m`o<ESC>p``", { desc = "paste below current line" })
-keymap.set("n", "<leader>P", "m`O<ESC>p``", { desc = "paste above current line" })
-
 -- Close location list or quickfix list if they are present, see https://superuser.com/q/355325/736190
 keymap.set("n", [[\x]], "<cmd>windo lclose <bar> cclose <cr>", {
   silent = true,
@@ -218,9 +214,5 @@ keymap.set("n", "<Esc>", function()
   vim.cmd("fclose!")
 end, {
   desc = "close floating win",
-})
-
-keymap.set("n", "<leader>cf", "<cmd>ClangFormat<cr>", {
-    desc = "Format current file"
 })
 
