@@ -126,7 +126,7 @@ fi
 
 "$NODE_DIR/bin/npm" install -g yaml-language-server
 
-"$NODE_DIR/bin/npm" install -g typescript typescript-language-server
+"$NODE_DIR/bin/npm" install -g typescript-language-server
 
 #######################################################################
 #                         lua-language-server                         #
