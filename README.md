@@ -80,7 +80,14 @@ and how to set up on different platforms (Linux, macOS, and Windows).
 + Tags navigation via [vista](https://github.com/liuchengxu/vista.vim).
 + Undo management via [vim-mundo](https://github.com/simnalamburt/vim-mundo)
 + Code folding with [nvim-ufo](https://github.com/kevinhwang91/nvim-ufo) and [statuscol.nvim](https://github.com/luukvbaal/statuscol.nvim)
+* Code debugging with [nvim-dap](https://github.com/mfussenegger/nvim-dap)
 + ......
+
+## Debugging
+
+debugging is accomplished with the debugger adapter protocon. i've added meson to make installing debuggers easier
+
+current config lets you use lldb to debug c++ code. you can create a file `local_config.lua` in your project directory that exports `executable` and `args` variables, these will be used to launch your executable. the current config uses nvim's working directory as the working directory for the executable, which works very well for my workflows
 
 # UI Demo
 
@@ -168,9 +175,11 @@ Some of the shortcuts I use frequently are listed here. In the following shortcu
 | `<leader>gl`      | Normal/Visual | Linux/macOS/Win | Get perm link for current/visually-select lines                          |
 | `<leader>gbr`     | Normal        | macOS           | Browse current git repo in browser                                       |
 | `<leader>gb`      | Visual        | macOS           | Blame current line                                                       |
-| `<F9>`            | Normal        | Linux/macOS/Win | Compile&run current source file (for C++, LaTeX, Lua, Python)            |
-| `<F11>`           | Normal        | Linux/macOS/Win | Toggle spell checking                                                    |
-| `<F12>`           | Normal        | Linux/macOS/Win | Toggle paste mode                                                        |
+| `<F5>`            | Normal        | Linux/macOS/Win | Start debugging session (C++ only)                                       |
+| `<F10>`           | Normal        | Linux/macOS/Win | Step over function while debugging                                       |
+| `<F11>`           | Normal        | Linux/macOS/Win | Step into function while debugging                                       |
+| `<SHIFT+F11>`     | Normal        | Linux/macOS/Win | step out of function while debugging                                     |
+| `<leader>dq`      | Normal        | Linux/macOS/Win | Quit debugging session                                                   |
 | `\x`              | Normal        | Linux/macOS/Win | Close location or quickfix window                                        |
 | `\d`              | Normal        | Linux/macOS/Win | Close current buffer and go to previous buffer                           |
 | `{count}gb`       | Normal        | Linux/macOS/Win | Go to buffer `{count}` or next buffer in the buffer list.                |
@@ -212,3 +221,4 @@ You may also be interested in my posts on configuring Nvim:
 + [Config nvim on Linux for Python development](https://jdhao.github.io/2018/12/24/centos_nvim_install_use_guide_en/)
 + [Nvim config on Windows 10](https://jdhao.github.io/2018/11/15/neovim_configuration_windows/)
 + [Nvim-qt config on Windows 10](https://jdhao.github.io/2019/01/17/nvim_qt_settings_on_windows/)
+* [A Guide to Debugging Code in NeoVim](https://tamerlan.dev/a-guide-to-debugging-applications-in-neovim/)

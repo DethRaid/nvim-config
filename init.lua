@@ -31,6 +31,9 @@ require("plugin_specs")
 -- diagnostic related config
 require("diagnostic-conf")
 
+-- debugger
+require("dap_config")
+
 -- colorscheme settings
 local color_scheme = require("colorschemes")
 color_scheme.gruvbox_material();

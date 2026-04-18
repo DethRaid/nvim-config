@@ -4,8 +4,6 @@ set commentstring=//\ %s
 set formatoptions-=o
 set formatoptions-=r
 
-nnoremap <silent> <buffer> <F9> :call <SID>compile_run_cpp()<CR>
-
 function! s:compile_run_cpp() abort
   let src_path = expand('%:p:~')
   let src_noext = expand('%:p:~:r')

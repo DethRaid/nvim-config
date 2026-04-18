@@ -91,10 +91,6 @@ keymap.set("n", "<leader>cd", "<cmd>lcd %:p:h<cr><cmd>pwd<cr>", { desc = "change
 -- Use Esc to quit builtin terminal
 keymap.set("t", "<Esc>", [[<c-\><c-n>]])
 
--- Toggle spell checking
-keymap.set("n", "<F11>", "<cmd>set spell!<cr>", { desc = "toggle spell" })
-keymap.set("i", "<F11>", "<c-o><cmd>set spell!<cr>", { desc = "toggle spell" })
-
 -- Change text without putting it into the vim register,
 -- see https://stackoverflow.com/q/54255/6064933
 keymap.set("n", "c", '"_c')
@@ -206,9 +202,6 @@ end, { desc = "show cursor" })
 keymap.set("n", "q", function()
   vim.print("q is remapped to Q in Normal mode!")
 end)
-keymap.set("n", "Q", "q", {
-  desc = "Record macro",
-})
 
 keymap.set("n", "<Esc>", function()
   vim.cmd("fclose!")
