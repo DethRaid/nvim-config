@@ -7,63 +7,79 @@ local dap_virtual_text = require("nvim-dap-virtual-text")
 dap_virtual_text.setup()
 
 mason_dap.setup({
-	ensure_installed = { "codelldb" },
-	automatic_installation = true,
-	handlers = {
-		function(config)
-			require("mason-nvim-dap").default_setup(config)
-		end,
-	},
+    ensure_installed = { "codelldb" },
+    automatic_installation = true,
+    handlers = {
+        function(config)
+            require("mason-nvim-dap").default_setup(config)
+        end,
+    },
 })
+
+local get_executable = function()
+    local local_config = loadfile(vim.fn.getcwd() .. '/' .. 'launch.lua')
+    if local_config then
+        local config = local_config()
+        return vim.fn.getcwd() .. '/' .. config.executable
+    else
+        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end
+end
+
+local get_args = function()
+    local local_config = loadfile(vim.fn.getcwd() .. '/' .. 'launch.lua')
+    if local_config then
+        local config = local_config()
+        return vim.split(config.args, ' +', { trimempty = true })
+    else
+        return vim.split(vim.fn.input('Args: '), ' +', { trimempty = true })
+    end
+end
+
+local get_addr = function()
+    local local_config = loadfile(vim.fn.getcwd() .. '/' .. 'launch.lua')
+    local uri = ""
+    if local_config then
+        local config = local_config()
+        if config.remote_addr then
+            uri = config.remote_addr
+        end
+    end
+    if uri == "" then
+        uri = vim.fn.input('[host]:port : ')
+    end
+    if uri:find('^%d+$') == 1 then
+        uri = 'localhost:' .. uri
+    elseif uri:find(':', nil, true) == 1 then
+        uri = 'localhost' .. uri
+    end
+    return uri
+end
 
 -- Configurations
 dap.configurations = {
-	cpp = {
+    cpp = {
         {
-	    	name = 'LLDB: Launch',
-	    	type = 'codelldb',
-	    	request = 'launch',
-	    	program = function()
-                local local_config = loadfile(vim.fn.getcwd() .. '/' .. 'launch.lua')
-                if local_config then
-                    local config = local_config()
-                    return vim.fn.getcwd() .. '/' .. config.executable
-                else
-	    		    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-                end
-	    	end,
-	    	cwd = '${workspaceFolder}',
-	    	stopOnEntry = false,
-	    	args = {},
-	    	console = 'integratedTerminal',
-	    },
-	    {
-	    	name = 'LLDB: Launch (args)',
-	    	type = 'codelldb',
-	    	request = 'launch',
-	    	program = function()
-                local local_config = loadfile(vim.fn.getcwd() .. '/' .. 'launch.lua')
-                if local_config then
-                    local config = local_config()
-                    return vim.fn.getcwd() .. '/' .. config.executable
-                else
-	    		    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-                end
-	    	end,
-	    	cwd = '${workspaceFolder}',
-	    	stopOnEntry = false,
-	    	args = function()
-                local local_config = loadfile(vim.fn.getcwd() .. '/' .. 'launch.lua')
-                if local_config then
-                    local config = local_config()
-                    return vim.split(config.args, ' +', { trimempty = true })
-                else
-	    		    return vim.split(vim.fn.input('Args: '), ' +', { trimempty = true })
-                end
-	    	end,
-	    	console = 'integratedTerminal',
-	    },
-	},
+            name = 'LLDB: Launch',
+            type = 'codelldb',
+            request = 'launch',
+            program = get_executable,
+            cwd = '${workspaceFolder}',
+            args = get_args,
+            console = 'integratedTerminal',
+        },
+        {
+            name = 'Attach to gdbserver (port)',
+            type = 'cppdbg',
+            request = 'launch',
+            MIMode = 'gdb',
+            miDebuggerServerAddress = get_addr,
+            miDebuggerPath = vim.fn.exepath('gdb'),
+            cwd = '${workspaceFolder}',
+            args = get_args,
+            program = get_executable,
+        },
+    },
 }
 
 -- Dap UI
@@ -73,16 +89,16 @@ ui.setup()
 vim.fn.sign_define("DapBreakpoint", { text = "🐞" })
 
 dap.listeners.before.attach.dapui_config = function()
-	ui.open()
+    ui.open()
 end
 dap.listeners.before.launch.dapui_config = function()
-	ui.open()
+    ui.open()
 end
 dap.listeners.before.event_terminated.dapui_config = function()
-	ui.close()
+    ui.close()
 end
 dap.listeners.before.event_exited.dapui_config = function()
-	ui.close()
+    ui.close()
 end
 
 -- setup hotkeys
