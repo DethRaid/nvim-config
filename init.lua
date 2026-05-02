@@ -47,6 +47,8 @@ vim.filetype.add({
         -- sah engine
         sscene = 'json',
         sprefab = 'json',
+        -- slang shaders
+        slangi = 'shaderslang',
     }
 })
 

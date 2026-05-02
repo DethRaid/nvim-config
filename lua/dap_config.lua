@@ -7,7 +7,7 @@ local dap_virtual_text = require("nvim-dap-virtual-text")
 dap_virtual_text.setup()
 
 mason_dap.setup({
-    ensure_installed = { "codelldb" },
+    ensure_installed = { "codelldb", "firefox", },
     automatic_installation = true,
     handlers = {
         function(config)
@@ -64,7 +64,9 @@ dap.configurations = {
             type = 'codelldb',
             request = 'launch',
             program = get_executable,
-            cwd = '${workspaceFolder}',
+            cwd = function()
+                return vim.fn.getcwd()
+            end,
             args = get_args,
             console = 'integratedTerminal',
         },
@@ -80,6 +82,19 @@ dap.configurations = {
             program = get_executable,
         },
     },
+    firefox = {
+        {
+            name = 'Firefox: Debug',
+            type = 'firefox',
+            request = 'launch',
+            reAttach = true,
+            url = function()
+                return vim.fn.input('Url to debug : ')
+            end,
+            webRoot = '${workspaceFolder}',
+            firefoxExecutable = vim.fn.exepath('firefox'),
+        },
+    }
 }
 
 -- Dap UI
@@ -105,7 +120,18 @@ end
 local keymap = vim.keymap
 
 keymap.set("n", "<F5>", function()
-    require("dap").continue()
+    local dap = require("dap")
+    if dap.session() == nil then
+        local local_config = loadfile(vim.fn.getcwd() .. '/' .. 'launch.lua')
+        if local_config then
+            local config = local_config()
+            if config.build_command then
+                vim.fn.execute(config.build_command)
+            end
+        end
+    end
+
+    dap.continue()
 end, {
     desc = "continue"
 })
