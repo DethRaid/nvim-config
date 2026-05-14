@@ -760,7 +760,12 @@ local plugin_specs = {
 
   {
     "mason-org/mason.nvim",
-    opts = {}
+    opts = {
+        ensure_installed = {
+            "djlint",
+            "jinja-lsp"
+        }
+    }
   },
 
   -- debugger adapter protpcol
