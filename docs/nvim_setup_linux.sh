@@ -3,11 +3,11 @@ set -exu
 set -o pipefail
 
 # Whether python3 has been installed on the system
-PYTHON_INSTALLED=true
+PYTHON_INSTALLED=false
 
 # If Python has been installed, then we need to know whether Python is provided
 # by the system, or you have already installed Python under your HOME.
-SYSTEM_PYTHON=true
+SYSTEM_PYTHON=false
 
 # If SYSTEM_PYTHON is false, we need to decide whether to install
 # Anaconda (INSTALL_ANACONDA=true) or Miniconda (INSTALL_ANACONDA=false)
@@ -97,7 +97,7 @@ fi
 NODE_DIR=$HOME/tools/nodejs
 NODE_SRC_NAME=$HOME/packages/nodejs.tar.gz
 # when download speed is slow, we can also use its mirror site: https://mirrors.ustc.edu.cn/node/v15.0.0/
-NODE_LINK="https://mirrors.ustc.edu.cn/node/v15.0.0/node-v15.0.0-linux-x64.tar.xz"
+NODE_LINK="https://nodejs.org/dist/v24.16.0/node-v24.16.0-linux-x64.tar.xz"
 if [[ -z "$(command -v node)" ]]; then
     echo "Install Node.js"
     if [[ ! -f $NODE_SRC_NAME ]]; then
